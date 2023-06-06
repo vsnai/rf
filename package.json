@@ -2,10 +2,20 @@
   "name": "jest",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "test": "jest --coverage --verbose"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-jest.ts"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "semi": false,
+    "singleQuote": true
   },
   "private": true,
   "dependencies": {
@@ -17,6 +27,7 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "node-jose": "^2.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -25,6 +36,10 @@
     "@angular-devkit/build-angular": "^16.0.4",
     "@angular/cli": "~16.0.4",
     "@angular/compiler-cli": "^16.0.0",
+    "@types/jest": "^29.5.2",
+    "@types/node-jose": "^1.1.10",
+    "jest": "^29.5.0",
+    "jest-preset-angular": "^13.1.1",
     "typescript": "~5.0.2"
   }
 }
