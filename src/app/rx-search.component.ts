@@ -93,11 +93,11 @@ const database: Account[] = [
   `,
 })
 export class RxSearchComponent {
-  input$ = new BehaviorSubject('')
-  query$ = this.input$.pipe(
+  readonly input$ = new BehaviorSubject('')
+  readonly query$ = this.input$.pipe(
     map(input => (input.startsWith('ssn:') ? input.substring(4) : input))
   )
-  queryType$ = this.input$.pipe(
+  readonly queryType$ = this.input$.pipe(
     map(input => {
       if (input.startsWith('ssn:')) {
         return 'ssn'
@@ -109,16 +109,16 @@ export class RxSearchComponent {
     })
   )
 
-  onManualSearch$ = new Subject<void>()
+  readonly onManualSearch$ = new Subject<void>()
 
   // window.dispatchEvent(new CustomEvent('auto-search', { detail: { query: '1', correlationId: 'TEST-FOO', selectedCustomer: 'secondary' } }))
-  onAutoSearch$ = fromEvent<AutoSearch>(window, 'auto-search').pipe(
+  readonly onAutoSearch$ = fromEvent<AutoSearch>(window, 'auto-search').pipe(
     filter(({ detail: { query } }) => !!query),
     tap(({ detail: { query } }) => this.input$.next(query)),
     map(({ detail }) => detail)
   )
 
-  vm$: Observable<ViewModel> = merge(
+  readonly vm$: Observable<ViewModel> = merge(
     this.onManualSearch$,
     this.onAutoSearch$
   ).pipe(
